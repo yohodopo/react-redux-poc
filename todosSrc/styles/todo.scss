@@ -1,0 +1,15 @@
+.strike{
+    text-decoration: line-through;
+}
+
+.active{
+    color: cornflowerblue;
+    box-shadow: 0 0 2px 1px;
+}
+
+.viewFilter{
+    button{
+        margin: 15px;
+        height: 20px;
+    }
+}
