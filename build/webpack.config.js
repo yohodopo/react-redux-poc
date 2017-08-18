@@ -25,7 +25,7 @@ const config = {
   output: {
     path: inProject(project.outDir),
     filename: __DEV__ ? '[name].js' : '[name].[chunkhash].js',
-    publicPath: project.publicPath,
+    publicPath: __DEV__ ? project.publicPath : "./",
   },
   resolve: {
     modules: [
@@ -48,6 +48,7 @@ const config = {
 
     new ServiceWorkerWebpackPlugin({
       entry: inProjectSrc('sw'),
+      publicPath: __DEV__ ? project.publicPath : "./"
     }),
   ],
 }
@@ -118,7 +119,7 @@ config.module.rules.push({
               browsers: ['last 2 versions'],
             },
             discardComments: {
-              removeAll : true,
+              removeAll: true,
             },
             discardUnused: false,
             mergeIdents: false,
@@ -145,36 +146,36 @@ config.plugins.push(extractStyles)
 // Images
 // ------------------------------------
 config.module.rules.push({
-  test    : /\.(png|jpg|gif)$/,
-  loader  : 'url-loader',
-  options : {
-    limit : 8192,
+  test: /\.(png|jpg|gif)$/,
+  loader: 'url-loader',
+  options: {
+    limit: 8192,
   },
 })
 
-// Fonts
-// ------------------------------------
-;[
-  ['woff', 'application/font-woff'],
-  ['woff2', 'application/font-woff2'],
-  ['otf', 'font/opentype'],
-  ['ttf', 'application/octet-stream'],
-  ['eot', 'application/vnd.ms-fontobject'],
-  ['svg', 'image/svg+xml'],
-].forEach((font) => {
-  const extension = font[0]
-  const mimetype = font[1]
+  // Fonts
+  // ------------------------------------
+  ;[
+    ['woff', 'application/font-woff'],
+    ['woff2', 'application/font-woff2'],
+    ['otf', 'font/opentype'],
+    ['ttf', 'application/octet-stream'],
+    ['eot', 'application/vnd.ms-fontobject'],
+    ['svg', 'image/svg+xml'],
+  ].forEach((font) => {
+    const extension = font[0]
+    const mimetype = font[1]
 
-  config.module.rules.push({
-    test    : new RegExp(`\\.${extension}$`),
-    loader  : 'url-loader',
-    options : {
-      name  : 'fonts/[name].[ext]',
-      limit : 10000,
-      mimetype,
-    },
+    config.module.rules.push({
+      test: new RegExp(`\\.${extension}$`),
+      loader: 'url-loader',
+      options: {
+        name: 'fonts/[name].[ext]',
+        limit: 10000,
+        mimetype,
+      },
+    })
   })
-})
 
 // HTML Template
 // ------------------------------------

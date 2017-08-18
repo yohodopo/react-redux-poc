@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-//Components
+// Components
 import BOOKLIST from "./bookList";
 import VIEWFILTER from "./viewFilter";
 import SPINNER from "./spinner";
@@ -36,8 +36,8 @@ export class BOOKS extends React.Component {
 }
 
 BOOKS.propTypes = {
-    dispatch: propTypes.func.isRequired,
-    isFetching: propTypes.bool.isRequired,
-    books: propTypes.object.isRequired,
-    viewFilter: propTypes.string.isRequired
+    dispatch: propTypes.func,
+    isFetching: propTypes.bool,
+    books: propTypes.object,
+    viewFilter: propTypes.string
 }

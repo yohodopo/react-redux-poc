@@ -11,7 +11,8 @@ export class BOOK extends React.Component {
         return (
             <div className="tile" title={volInfo.title} onClick={this.toggleTodo}>
                 <a href={volInfo.previewLink} target="_blank">
-                    <img src={volInfo.imageLinks && volInfo.imageLinks.smallThumbnail} alt={volInfo.title} />
+                    <img src={(volInfo.imageLinks && volInfo.imageLinks.smallThumbnail &&
+                     volInfo.imageLinks.smallThumbnail.replace("https://", "https://"))} alt={volInfo.title} />
                 </a>
                 <p>{volInfo.title}</p>
             </div>
@@ -21,7 +22,7 @@ export class BOOK extends React.Component {
 
 BOOK.propTypes = {
     onTodoClick: propTypes.func.isRequired,
-    book: propTypes.objectOf({
+    book: propTypes.shape({
         id: propTypes.any.isRequired,
         volumeInfo: {
             title: propTypes.string.isRequired,
