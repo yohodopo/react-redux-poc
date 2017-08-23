@@ -8,6 +8,7 @@ import {
     SET_VISIBLITY_FILTER, SET_IS_FETCHING, FETCH_TODOS
 } from "./actions";
 
+import Defer from "../yohodopo/defer";
 import fetch from "isomorphic-fetch";
 
 export const addTodo = text => ({ "type": ADD_TODO, text });
@@ -16,12 +17,31 @@ export const toggleTodo = item => ({ "type": TOGGLE_TODO, id: item });
 
 export const setBooks = (books) => ({ type: "SET_BOOKS", books });
 
-//export const setBooks = (books) => ({ type: "SET_BOOKS", books });
+// export const setBooks = (books) => ({ type: "SET_BOOKS", books });
 
 export const changeVisibity = filter => ({ "type": SET_VISIBLITY_FILTER, filter });
 
 export const setIsFetching = isFetching => ({ type: SET_IS_FETCHING, isFetching });
 
+export const setIsLoggedin = isLoggedIn => ({ type: "IS_LOGGED_IN", isLoggedIn });
+
+export const authenticateUser = credentials => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true));
+        let deferred = new Defer();
+        setTimeout(() => {
+            let validUser = credentials.userId === "mass" && credentials.password === "rules";
+            if (validUser) {
+                deferred.resolve({ isLoggedIn: true });
+                dispatch(setIsLoggedin(true));
+            } else {
+                deferred.reject({ status: 401 });
+            }
+            dispatch(setIsFetching(false));
+        }, 2000);
+        return deferred.promise;
+    }
+}
 
 export const getVisibleBooks = (books, filter) => {
     switch (filter) {
@@ -69,5 +89,4 @@ export const fetchBooks = (query = "''") => {
                 console.log(`Error occoured, ${error.message}`);
             });
     }
-
-} 
+}

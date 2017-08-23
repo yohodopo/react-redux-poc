@@ -8,8 +8,5 @@ export const SHOW_ALL = 'SHOW_ALL';
 export const SHOW_DONE = 'SHOW_DONE';
 export const SHOW_PENDING = 'SHOW_PENDING';
 
-
 export const FETCH_TODOS = "FETCH_TODOS";
 export const SET_IS_FETCHING = "SET_IS_FETCHING";
-
-

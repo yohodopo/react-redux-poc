@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('../project.config')
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const inProject = path.resolve.bind(path, project.basePath)
 const inProjectSrc = (file) => inProject(project.srcDir, file)
@@ -50,6 +51,8 @@ const config = {
       entry: inProjectSrc('sw'),
       publicPath: __DEV__ ? project.publicPath : "./"
     }),
+
+    new CopyWebpackPlugin([ { from: inProjectSrc('static'), to: 'assets/img' } ])
   ],
 }
 
@@ -98,7 +101,7 @@ config.module.rules.push({
 // Styles
 // ------------------------------------
 const extractStyles = new ExtractTextPlugin({
-  filename: 'styles/[name].[contenthash].css',
+  filename: 'assets/styles/[name].[contenthash].css',
   allChunks: true,
   disable: __DEV__,
 })
@@ -149,7 +152,9 @@ config.module.rules.push({
   test: /\.(png|jpg|gif)$/,
   loader: 'url-loader',
   options: {
+    name: 'assets/img/[name].[ext]',
     limit: 8192,
+    publicPath: __DEV__ ? project.publicPath : "/react-redux-poc/"
   },
 })
 

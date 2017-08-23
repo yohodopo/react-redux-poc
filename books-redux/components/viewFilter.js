@@ -12,9 +12,9 @@ export default class VIEWFILTER extends React.Component {
     render() {
         return (
             <div className="viewFilter">
-                <NavLink to="/books/SHOW_ALL" activeClassName="active"> Show All </NavLink>
-                <NavLink to="/books/SHOW_DONE" activeClassName="active"> Show Done </NavLink>
-                <NavLink to="/books/SHOW_PENDING" activeClassName="active" > Show Pending </NavLink>
+                <NavLink to="/books/SHOW_ALL" data-filtertype="SHOW_ALL" activeClassName="active" onClick={this.setFilter}> Show All </NavLink>
+                <NavLink to="/books/SHOW_DONE" data-filtertype="SHOW_DONE" activeClassName="active" onClick={this.setFilter} > Show Done </NavLink>
+                <NavLink to="/books/SHOW_PENDING" data-filtertype="SHOW_PENDING" activeClassName="active" onClick={this.setFilter} > Show Pending </NavLink>
             </div>
         )
     }

@@ -8,12 +8,12 @@ import { render } from "react-dom";
 import { Provider } from 'react-redux';
 import "./styles/todo.scss";
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 
 // import { addTodo, deleteTodo, toggleTodo, changeVisibity, setIsFetching } from "./actions/actionsCreators"
 
 import { todoApp } from './reducers/reducer'
-import { AppComponent } from './components/app';
+import AppComponent from './components/app';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 let loggerMiddleware = createLogger();
@@ -25,13 +25,14 @@ let store = createStore(todoApp, applyMiddleware(
 
 render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
+      {/* <Route path="/" component={AppComponent} /> */}
       <AppComponent />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 );
 
-if ('serviceWorker' in navigator) {
-  runtime.register();
-}
+// if ('serviceWorker' in navigator) {
+//   runtime.register();
+// }

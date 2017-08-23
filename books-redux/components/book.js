@@ -12,7 +12,7 @@ export class BOOK extends React.Component {
             <div className="tile" title={volInfo.title} onClick={this.toggleTodo}>
                 <a href={volInfo.previewLink} target="_blank">
                     <img src={(volInfo.imageLinks && volInfo.imageLinks.smallThumbnail &&
-                     volInfo.imageLinks.smallThumbnail.replace("https://", "https://"))} alt={volInfo.title} />
+                     volInfo.imageLinks.smallThumbnail.replace("http://", "https://"))} alt={volInfo.title} />
                 </a>
                 <p>{volInfo.title}</p>
             </div>
