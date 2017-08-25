@@ -25,8 +25,10 @@ export const books = (state = {}, action) => {
             let newTodos = Object.assign({}, state);
             newTodos[action.id]['isCompleted'] = !newTodos[action.id]['isCompleted'];
             return newTodos;
-        case "SET_BOOKS":  
+        case "SET_BOOKS":
             return action.books;
+        case "GET_BOOK_DETAIL_ID":
+            return state[action.id];
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 
-export class SEARCHBOX extends React.Component {
+export default class SearchBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,7 +34,7 @@ export class SEARCHBOX extends React.Component {
     }
 }
 
-SEARCHBOX.propTypes = {
+SearchBox.propTypes = {
     handleSearch: propTypes.func.isRequired,
     q: propTypes.string
 }

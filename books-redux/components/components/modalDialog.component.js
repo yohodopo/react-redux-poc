@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 
-export class ModalDialog extends React.PureComponent {
+export default class ModalDialog extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = { isOpen: this.props.open }

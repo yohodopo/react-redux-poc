@@ -1,11 +1,11 @@
 import {
     ADD_TODO,
     DELETE_TODO,
-    SHOW_ALL,
-    SHOW_DONE,
-    SHOW_PENDING,
+    // SHOW_ALL,
+    // SHOW_DONE,
+    // SHOW_PENDING,
     TOGGLE_TODO,
-    SET_VISIBLITY_FILTER, SET_IS_FETCHING, FETCH_TODOS
+    SET_VISIBLITY_FILTER, SET_IS_FETCHING, // FETCH_TODOS
 } from "./actions";
 
 import Defer from "../yohodopo/defer";
@@ -25,13 +25,20 @@ export const setIsFetching = isFetching => ({ type: SET_IS_FETCHING, isFetching 
 
 export const setIsLoggedin = isLoggedIn => ({ type: "IS_LOGGED_IN", isLoggedIn });
 
+export const getBookDetail = id => ({ type: 'GET_BOOK_DETAIL_ID', id });
+
 export const authenticateUser = credentials => {
     return (dispatch) => {
         dispatch(setIsFetching(true));
         let deferred = new Defer();
         setTimeout(() => {
+            let admin = credentials.userId === "admin" && credentials.password === "admin";
             let validUser = credentials.userId === "mass" && credentials.password === "rules";
             if (validUser) {
+                deferred.resolve({ isLoggedIn: true });
+                dispatch(setIsLoggedin(true));
+            } else if (admin) {
+                localStorage.setItem("tokenId", "YohoDopo");
                 deferred.resolve({ isLoggedIn: true });
                 dispatch(setIsLoggedin(true));
             } else {
@@ -43,7 +50,7 @@ export const authenticateUser = credentials => {
     }
 }
 
-export const getVisibleBooks = (books, filter) => {
+export const getVisibleBooks = (books = {}, filter) => {
     switch (filter) {
         case "SHOW_ALL":
             return books;
@@ -76,7 +83,7 @@ export const fetchBooks = (query = "''") => {
                 }
             })
             .then(data => {
-                let books = new Object();
+                let books = {};
                 data.items.forEach((book) => {
                     books[book.id] = book;
                 }, this);

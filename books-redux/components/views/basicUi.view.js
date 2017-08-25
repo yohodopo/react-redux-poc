@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 // import Defer from "../yohodopo/defer";
-import { ModalDialog } from "./reactModal"
+
+import ModalDialog from "../components/modalDialog.component";
+
 @connect((store, dispatchedProps, ownProps) => {
     return { abba: "jabba" };
 })
@@ -13,7 +15,7 @@ import { ModalDialog } from "./reactModal"
 // if there is a difference between
 // Old and new state(Shallow check). To do deep checking, we will have to manually do the checking and return true/false
 // in function - >'shouldComponentUpdate'
-export class BASICCOMPONENTS extends React.PureComponent {
+export default class BasicComponents extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -116,12 +118,14 @@ export class BASICCOMPONENTS extends React.PureComponent {
                     </div>
                 </form>
                 <ModalDialog open={this.state.showModal} onModalClose={this.closeModal}>
-                    <h1>Hello dudus, this is modal-1 content</h1>
-                    <button onClick={this.openModal2}>Open Modal2</button>
-                    <button onClick={this.closeModal2}>Close Modal2</button>
-                    <ModalDialog open={this.state.showModal2} onModalClose={this.closeModal2}>
-                        <h1>Hello dudus, this is modal-2 content</h1>
-                    </ModalDialog>
+                    <div>
+                        <h1>Hello dudus, this is modal-1 content</h1>
+                        <button onClick={this.openModal2}>Open Modal2</button>
+                        <button onClick={this.closeModal2}>Close Modal2</button>
+                        <ModalDialog open={this.state.showModal2} onModalClose={this.closeModal2}>
+                            <h1>Hello dudus, this is modal-2 content</h1>
+                        </ModalDialog>
+                    </div>
                 </ModalDialog>
                 <button onClick={this.openModal}>Open Modal</button>
                 <button onClick={this.closeModal}>Close Modal</button>

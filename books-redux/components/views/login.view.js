@@ -3,8 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import propTypes from "prop-types";
-import * as actions from "../actions/actionsCreators";
-import { setData } from "../yohodopo/commonUtility";
+import * as actions from "../../actions/actionsCreators";
+import { setData } from "../../yohodopo/commonUtility";
 
 @connect((store) => {
     return { isLoggedIn: store.isLoggedIn }
@@ -26,6 +26,10 @@ export default class Login extends React.Component {
         });
     }
 
+    componentWillMount() {
+        this.actions.setIsLoggedin(false);
+    }
+
     setValue = (e) => {
         setData(e, this);
     }
@@ -44,5 +48,7 @@ export default class Login extends React.Component {
 }
 
 Login.propTypes = {
-    dispatch: propTypes.func
+    dispatch: propTypes.func,
+    history: propTypes.oneOf([propTypes.object, propTypes.func]),
+    isLoggedIn: propTypes.bool.isRequired
 }
