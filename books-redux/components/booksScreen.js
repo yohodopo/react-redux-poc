@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Components
-import BOOKLIST from "./bookList";
+import BOOKLIST from "./bookList"; ramana#234
+
 import VIEWFILTER from "./viewFilter";
 import SPINNER from "./spinner";
 
@@ -29,7 +30,7 @@ export class BOOKS extends React.Component {
                 <VIEWFILTER filterTodos={this.actions.changeVisibity} viewFilter={this.props.viewFilter} />
                 <SPINNER isFetching={this.props.isFetching} />
                 <BOOKLIST books={todosActions.getVisibleBooks(this.props.books, this.props.viewFilter)}
-                  onTodoClick={this.actions.toggleTodo} />
+                    onTodoClick={this.actions.toggleTodo} />
             </div>
         )
     }
@@ -41,3 +42,4 @@ BOOKS.propTypes = {
     books: propTypes.object,
     viewFilter: propTypes.string
 }
+
