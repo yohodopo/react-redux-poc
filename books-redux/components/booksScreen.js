@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Components
-import BOOKLIST from "./bookList"; ramana#234
+import BOOKLIST from "./bookList";
 
 import VIEWFILTER from "./viewFilter";
 import SPINNER from "./spinner";
